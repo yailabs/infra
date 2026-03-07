@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+YAI_ROOT="${YAI_ROOT:-$(cd "$ROOT/.." && pwd)}"
+OUT_DEFAULT="$ROOT/docs/reports/runtime-resolution-audit-v1.md"
+OUT="${1:-$OUT_DEFAULT}"
+
+mkdir -p "$(dirname "$OUT")"
+
+repos=(yai-law yai-sdk yai-cli yai yai-ops yai-infra)
+patterns=(
+  "absolute_path|/home/|/Users/"
+  "repo_relative_runtime|\.\./yai/|\.\./dist/|\.\./build/"
+  "process_kill|pkill -f"
+  "process_shell|\\bsystem\\("
+  "binary_exec|\\bexeclp?\\("
+  "path_mutation|setenv\\(\"PATH\""
+)
+
+severity_for() {
+  local cls="$1"
+  case "$cls" in
+    absolute_path|process_kill) echo "P0" ;;
+    repo_relative_runtime|process_shell|binary_exec|path_mutation) echo "P1" ;;
+    *) echo "P2" ;;
+  esac
+}
+
+action_for() {
+  local cls="$1"
+  case "$cls" in
+    absolute_path) echo "Replace with SDK runtime/install resolver API." ;;
+    repo_relative_runtime) echo "Move discovery into canonical resolver with deploy_mode gating." ;;
+    process_kill) echo "Use pidfile/control-endpoint shutdown; keep pkill only as documented fallback." ;;
+    process_shell) echo "Replace shell side-effects with direct API/system calls where possible." ;;
+    binary_exec) echo "Use canonical binary resolver; remove local fallback lists." ;;
+    path_mutation) echo "Remove PATH mutation from callers; resolve executable path once." ;;
+    *) echo "Review and classify manually." ;;
+  esac
+}
+
+{
+  echo "# Runtime Resolution Audit v1"
+  echo
+  echo "Generated: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo
+  echo "| repo | file:line | class | severity | recommended_action |"
+  echo "|---|---|---|---|---|"
+
+  for repo in "${repos[@]}"; do
+    base="$YAI_ROOT/$repo"
+    [[ -d "$base" ]] || continue
+
+    for item in "${patterns[@]}"; do
+      cls="${item%%|*}"
+      pat="${item#*|}"
+      rg -n "$pat" "$base" -S --glob '!**/.git/**' --glob '!**/dist/**' --glob '!**/build/**' --glob '!**/node_modules/**' --glob '!**/evidence/**' --glob '!**/migration/**' || true
+    done | head -n 80 | while IFS= read -r line; do
+      file_line="${line%%:*}:${line#*:}"
+      file_line="${file_line%%:*}:$(echo "$line" | cut -d: -f2)"
+      text="$(echo "$line" | cut -d: -f3-)"
+
+      cls="misc"
+      if [[ "$text" == *"/home/"* || "$text" == *"/Users/"* ]]; then cls="absolute_path"; fi
+      if [[ "$text" == *"../yai/"* || "$text" == *"../dist/"* || "$text" == *"../build/"* ]]; then cls="repo_relative_runtime"; fi
+      if [[ "$text" == *"pkill -f"* ]]; then cls="process_kill"; fi
+      if [[ "$text" == *"system("* ]]; then cls="process_shell"; fi
+      if [[ "$text" == *"execl("* || "$text" == *"execlp("* ]]; then cls="binary_exec"; fi
+      if [[ "$text" == *"setenv(\"PATH\""* ]]; then cls="path_mutation"; fi
+
+      sev="$(severity_for "$cls")"
+      action="$(action_for "$cls")"
+      rel="${file_line#$YAI_ROOT/}"
+      echo "| $repo | \`$rel\` | $cls | $sev | $action |"
+    done
+  done
+} > "$OUT"
+
+echo "[ok] wrote $OUT"
