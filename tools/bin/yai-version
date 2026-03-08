@@ -9,7 +9,7 @@ usage() {
 Usage:
   tools/bin/yai-version [--json]
 
-Outputs the canonical yai-infra toolkit version.
+Outputs the canonical infra toolkit version.
 USAGE
 }
 
@@ -27,11 +27,11 @@ version="$(tr -d '[:space:]' < "$VERSION_FILE")"
 commit="$(git -C "$ROOT" rev-parse --short HEAD 2>/dev/null || true)"
 
 if [[ "${1:-}" == "--json" ]]; then
-  printf '{"toolkit":"yai-infra","version":"%s","commit":"%s"}\n' "$version" "$commit"
+  printf '{"toolkit":"infra","version":"%s","commit":"%s"}\n' "$version" "$commit"
   exit 0
 fi
 
-printf 'yai-infra toolkit %s' "$version"
+printf 'infra toolkit %s' "$version"
 if [[ -n "$commit" ]]; then
   printf ' (%s)' "$commit"
 fi

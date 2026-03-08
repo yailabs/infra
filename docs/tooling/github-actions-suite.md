@@ -1,6 +1,6 @@
 # GitHub Actions Governance Suite (Canonical)
 
-`yai-infra` is the source of truth for governance workflows consumed by YAI repositories.
+`infra` is the source of truth for governance workflows consumed by YAI repositories.
 
 ## Canonical reusable workflows (`workflow_call`)
 
@@ -36,7 +36,7 @@ Standard secret contract:
 Consumer repos keep thin wrappers only:
 
 - trigger (`on:`)
-- `uses: yai-labs/yai-infra/.github/workflows/<reusable>.yml@<ref>`
+- `uses: yai-labs/infra/.github/workflows/<reusable>.yml@<ref>`
 - `with:` inputs
 - `secrets: inherit`
 

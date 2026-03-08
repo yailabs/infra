@@ -1,6 +1,6 @@
 # Toolkit Contract
 
-This document defines the canonical way to consume `yai-infra` tooling.
+This document defines the canonical way to consume `infra` tooling.
 
 ## Canonical entrypoint
 
@@ -13,14 +13,14 @@ Do not call internal Python modules or nested shell scripts directly from consum
 ### Local checkout mode
 
 ```bash
-cd yai-infra
+cd infra
 export PATH="$PWD/tools/bin:$PATH"
 yai-version
 ```
 
 ### Consumer wrapper mode
 
-Consumer repos should keep thin wrappers under their local `tools/bin/` that delegate to `yai-infra/tools/bin/*`.
+Consumer repos should keep thin wrappers under their local `tools/bin/` that delegate to `infra/tools/bin/*`.
 
 ## Version/debug contract
 

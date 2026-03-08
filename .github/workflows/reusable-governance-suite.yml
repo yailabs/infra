@@ -141,7 +141,7 @@ jobs:
       project_number: ${{ inputs.project_number }}
       repo_scope: ""
       dry_run: ${{ inputs.dry_run }}
-      infra_repo: yai-labs/yai-infra
+      infra_repo: yai-labs/infra
       infra_ref: main
     secrets: inherit
 

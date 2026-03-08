@@ -12,7 +12,7 @@ OUT_ROOT="$BUNDLE_ROOT/out"
 TMP_ROOT="$BUNDLE_ROOT/.bundle_tmp"
 CLI_PIN_FILE="$ROOT_DIR/deps/yai-cli.ref"
 
-YAI_CLI_REPO="${YAI_CLI_REPO:-https://github.com/yai-labs/yai-cli.git}"
+YAI_CLI_REPO="${YAI_CLI_REPO:-https://github.com/yai-labs/cli.git}"
 
 EXPECTED_BINS=(
   yai-boot
@@ -65,10 +65,10 @@ done
 # -----------------------------
 # CLI ingest (hard-fail on any error)
 # -----------------------------
-CLI_SRC_DIR="$TMP_ROOT/yai-cli"
-echo "[bundle] ingesting yai-cli from $YAI_CLI_REPO @ $CLI_PIN_SHA"
+CLI_SRC_DIR="$TMP_ROOT/cli"
+echo "[bundle] ingesting cli from $YAI_CLI_REPO @ $CLI_PIN_SHA"
 git clone "$YAI_CLI_REPO" "$CLI_SRC_DIR"
-git -C "$CLI_SRC_DIR" checkout "$CLI_PIN_SHA" || fail "failed to checkout pinned yai-cli SHA $CLI_PIN_SHA"
+git -C "$CLI_SRC_DIR" checkout "$CLI_PIN_SHA" || fail "failed to checkout pinned cli SHA $CLI_PIN_SHA"
 
 # Force specs parity with this runtime bundle pin to avoid drift.
 rm -rf "$CLI_SRC_DIR/deps/yai-law"
@@ -84,7 +84,7 @@ mkdir -p "$CLI_SRC_DIR/deps/yai-law"
 # Build only the CLI executable target (skip docs side effects).
 make -C "$CLI_SRC_DIR" "$CLI_SRC_DIR/dist/bin/yai-cli"
 CLI_BIN="$CLI_SRC_DIR/dist/bin/yai-cli"
-[ -f "$CLI_BIN" ] || fail "yai-cli build succeeded but binary not found at $CLI_BIN"
+[ -f "$CLI_BIN" ] || fail "cli build succeeded but binary not found at $CLI_BIN"
 cp "$CLI_BIN" "$STAGE_DIR/bin/yai"
 chmod +x "$STAGE_DIR/bin/yai"
 

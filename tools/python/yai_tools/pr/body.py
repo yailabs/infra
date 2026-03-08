@@ -29,7 +29,7 @@ def _set_section(md: str, heading: str, content: str) -> str:
 
 
 def _set_twin_pr_links_default(md: str) -> str:
-    md = re.sub(r"(^-\s+yai-cli PR:\s*).*$", r"\1N/A", md, flags=re.MULTILINE)
+    md = re.sub(r"(^-\s+cli PR:\s*).*$", r"\1N/A", md, flags=re.MULTILINE)
     md = re.sub(r"(^-\s+yai-specs PR:\s*).*$", r"\1N/A", md, flags=re.MULTILINE)
     return md
 
@@ -102,7 +102,7 @@ def _build_checklist(
         )
 
     if template == "type-b-twin-pr":
-        twin_hint = _has_validation_command(commands, ["yai-cli", "yai-specs"])
+        twin_hint = _has_validation_command(commands, ["cli", "yai-specs"])
         lines.extend(
             [
                 f"- [{'x' if twin_hint else ' '}] Cross-repo commands/evidence included",

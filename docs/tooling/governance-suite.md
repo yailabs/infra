@@ -40,7 +40,7 @@ on:
 
 jobs:
   governance:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-governance-suite.yml@main
+    uses: yai-labs/infra/.github/workflows/reusable-governance-suite.yml@main
     with:
       org: yai-labs
       project_number: 2

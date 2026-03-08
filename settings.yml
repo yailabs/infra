@@ -1,0 +1,8 @@
+# Configurazione org-wide per il GitHub Settings App.
+# Disattiva l'obbligo di review PR su tutti i branch protetti
+# gestiti tramite questa configurazione.
+
+branches:
+  - name: '*'
+    protection:
+      required_pull_request_reviews: null

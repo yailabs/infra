@@ -4,18 +4,18 @@ Repository analyzed: `yai`
 
 | Path | Class | Files | Notes |
 |---|---:|---:|---|
-| `tools/python/yai_tools` | infra-governance-tooling | 53 | candidate for move to yai-infra |
-| `tools/bin` | wrapper-and-governance-entrypoints | 27 | candidate for move to yai-infra |
-| `tools/ops` | cross-repo-ops-suite | 43 | candidate for move to yai-infra |
-| `tools/release` | cross-repo-release-automation | 5 | candidate for move to yai-infra |
-| `tools/data` | cross-repo-dataset-ops | 8 | candidate for move to yai-infra |
-| `tools/dev` | cross-repo-dev-ops | 8 | candidate for move to yai-infra |
-| `tools/bundle` | cross-repo-bundle-ops | 4 | candidate for move to yai-infra |
-| `tools/schemas/docs` | docs-schema-governance | 8 | candidate for move to yai-infra |
-| `docs/dev-guide` | cross-repo-governance-docs | 22 | candidate for move to yai-infra |
-| `docs/templates` | cross-repo-doc-templates | 5 | candidate for move to yai-infra |
-| `docs/_policy` | docs-policy | 2 | candidate for move to yai-infra |
-| `docs/proof` | proof-process-docs | 3 | candidate for move to yai-infra |
+| `tools/python/yai_tools` | infra-governance-tooling | 53 | candidate for move to infra |
+| `tools/bin` | wrapper-and-governance-entrypoints | 27 | candidate for move to infra |
+| `tools/ops` | cross-repo-ops-suite | 43 | candidate for move to infra |
+| `tools/release` | cross-repo-release-automation | 5 | candidate for move to infra |
+| `tools/data` | cross-repo-dataset-ops | 8 | candidate for move to infra |
+| `tools/dev` | cross-repo-dev-ops | 8 | candidate for move to infra |
+| `tools/bundle` | cross-repo-bundle-ops | 4 | candidate for move to infra |
+| `tools/schemas/docs` | docs-schema-governance | 8 | candidate for move to infra |
+| `docs/dev-guide` | cross-repo-governance-docs | 22 | candidate for move to infra |
+| `docs/templates` | cross-repo-doc-templates | 5 | candidate for move to infra |
+| `docs/_policy` | docs-policy | 2 | candidate for move to infra |
+| `docs/proof` | proof-process-docs | 3 | candidate for move to infra |
 
 ## Keep In YAI (Runtime/Core)
 
@@ -25,7 +25,7 @@ Repository analyzed: `yai`
 
 ## Migration Principle
 
-- Move governance/process/cross-repo assets to `yai-infra`.
+- Move governance/process/cross-repo assets to `infra`.
 - Keep only thin compatibility wrappers in `yai/tools/bin` where needed.
 - Keep only thin compatibility wrappers in `yai/tools/{ops,release,data,dev,bundle}` where required.
 - Avoid duplicate canonical docs/templates across repos.

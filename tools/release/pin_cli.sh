@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 PIN_FILE="$ROOT/deps/yai-cli.ref"
-YAI_CLI_REPO="${YAI_CLI_REPO:-https://github.com/yai-labs/yai-cli.git}"
+YAI_CLI_REPO="${YAI_CLI_REPO:-https://github.com/yai-labs/cli.git}"
 YAI_CLI_BRANCH="${YAI_CLI_BRANCH:-main}"
 EXPECTED_SPECS_SHA="${EXPECTED_SPECS_SHA:-}"
 
@@ -101,7 +101,7 @@ verify_expected_specs_alignment() {
     exit 1
   fi
   if [ "$cli_specs_sha" != "$expected" ]; then
-    echo "ERROR: resolved CLI sha is not aligned to EXPECTED_SPECS_SHA; update yai-cli or choose a different ref" >&2
+    echo "ERROR: resolved CLI sha is not aligned to EXPECTED_SPECS_SHA; update cli or choose a different ref" >&2
     echo "resolved_cli_sha=$cli_sha" >&2
     echo "cli_specs_pin=$cli_specs_sha" >&2
     echo "expected_specs_sha=$expected" >&2
@@ -120,7 +120,7 @@ main() {
   fi
 
   if ! is_sha40 "$resolved"; then
-    echo "ERROR: resolved yai-cli reference is not a 40-hex SHA: $resolved" >&2
+    echo "ERROR: resolved cli reference is not a 40-hex SHA: $resolved" >&2
     exit 1
   fi
 

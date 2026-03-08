@@ -7,7 +7,7 @@ WORKSPACE_ROOT="$(cd "${ROOT}/.." && pwd)"
 usage() {
   cat <<'EOF'
 Usage:
-  tools/bin/yai-dev-branch-sync [--name <branch>] [--repos yai,yai-cli,yai-mind] [--dry-run] [branch-args...]
+  tools/bin/yai-dev-branch-sync [--name <branch>] [--repos yai,cli,yai-mind] [--dry-run] [branch-args...]
 
 If --name is omitted, branch name is generated via tools/bin/yai-branch using branch-args.
 Examples:
@@ -17,7 +17,7 @@ EOF
 }
 
 BRANCH_NAME=""
-REPOS_CSV="yai,yai-cli,yai-mind"
+REPOS_CSV="yai,cli,yai-mind"
 DRY_RUN=0
 BRANCH_ARGS=()
 

@@ -1,6 +1,6 @@
 # GitHub Template Residency
 
-Canonical GitHub templates for YAI repositories are owned by `yai-infra`
+Canonical GitHub templates for YAI repositories are owned by `infra`
 under:
 
 - `governance/templates/github/.github/*`
@@ -15,7 +15,7 @@ Mirror files used by GitHub UX are generated from canonical source:
 
 Consumer repositories may keep local copies only as mirrors for GitHub UX
 compatibility. Mirror drift is not allowed and must be enforced by CI checks
-against `yai-infra` canonical templates.
+against `infra` canonical templates.
 
 Local sync/check commands:
 

@@ -1,6 +1,6 @@
 # Tooling
 
-Canonical CI/CD and governance-tooling contracts published by `yai-infra`.
+Canonical CI/CD and governance-tooling contracts published by `infra`.
 
 ## Included
 

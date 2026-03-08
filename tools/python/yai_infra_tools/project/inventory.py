@@ -1,7 +1,7 @@
 import argparse, hashlib, json
 from pathlib import Path
 
-REPOS = ["yai", "yai-cli", "yai-law", "yai-specs", "yai-skin", "yai-mind", "yai-yx"]
+REPOS = ["yai", "cli", "law", "yai-specs", "yai-skin", "yai-mind", "yai-yx"]
 
 
 def sha256_file(p: Path) -> str:
@@ -76,13 +76,13 @@ def main():
         }
         inventory["repos"][name] = entry
 
-    (out / "yai-infra-inventory.json").write_text(json.dumps(inventory, indent=2), encoding="utf-8")
+    (out / "infra-inventory.json").write_text(json.dumps(inventory, indent=2), encoding="utf-8")
     # Placeholders for next steps:
-    (out / "yai-infra-duplicates.csv").write_text(
+    (out / "infra-duplicates.csv").write_text(
         "logical_component,source_repo,source_path,similarity,proposed_owner\n", encoding="utf-8"
     )
-    (out / "yai-infra-move-map.yaml").write_text("# TODO: filled after triage\n", encoding="utf-8")
-    (out / "yai-infra-cutover-checklist.md").write_text("# Cutover Checklist\n\nTODO\n", encoding="utf-8")
+    (out / "infra-move-map.yaml").write_text("# TODO: filled after triage\n", encoding="utf-8")
+    (out / "infra-cutover-checklist.md").write_text("# Cutover Checklist\n\nTODO\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

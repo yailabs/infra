@@ -57,7 +57,7 @@ def _repo_root() -> str:
 
 
 def _safe_specs_sha(repo_root: str) -> str:
-    for rel in ("deps/yai-law", "deps/yai-law"):
+    for rel in ("deps/law", "deps/yai-specs"):
         try:
             out = subprocess.run(
                 ["git", "-C", f"{repo_root}/{rel}", "rev-parse", "HEAD"],
@@ -109,7 +109,7 @@ def _default_commands_for_template(template: str) -> list[str]:
     if template == "type-b-twin-pr":
         return [
             "bash tools/release/check_pins.sh",
-            "git -C deps/yai-law rev-parse --short HEAD",
+            "git -C deps/law rev-parse --short HEAD",
             "git rev-parse --short HEAD",
         ]
     return ["git status -sb"]
@@ -481,7 +481,7 @@ def cmd_pr_body(argv: list[str]) -> int:
                 results.append((cmd, run.returncode, combined))
 
             if not evidence_positive:
-                evidence_positive = [f"Baseline commit verified: yai + yai-cli -> {specs_sha}"]
+                evidence_positive = [f"Baseline commit verified: yai + cli -> {specs_sha}"]
                 for cmd, code, _ in results:
                     if code == 0 and "yai-proof-check" not in cmd:
                         evidence_positive.append(f"{cmd} exit code = 0")
@@ -498,7 +498,7 @@ def cmd_pr_body(argv: list[str]) -> int:
                 evidence_negative = neg
         else:
             if not evidence_positive:
-                evidence_positive = [f"Baseline commit verified: yai + yai-cli -> {specs_sha}"]
+                evidence_positive = [f"Baseline commit verified: yai + cli -> {specs_sha}"]
                 for cmd in commands:
                     evidence_positive.append(f"{cmd} exit code = 0 (to be confirmed in CI/local run)")
             if not evidence_negative:

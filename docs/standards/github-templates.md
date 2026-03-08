@@ -2,7 +2,7 @@
 
 ## Canonical source
 
-`yai-infra` is the source of truth for templates and labels.
+`infra` is the source of truth for templates and labels.
 
 Canonical source path:
 
@@ -18,8 +18,8 @@ Canonical source path:
 
 ## Rules
 
-1. `yai-infra` is source of truth.
+1. `infra` is source of truth.
 2. Consumer repositories keep mirror files only.
-3. Change templates only in `yai-infra`.
+3. Change templates only in `infra`.
 4. Sync mirrors with `sync --target`.
 5. Drift checks (`check --target`) are hard-fail in CI.

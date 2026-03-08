@@ -122,7 +122,7 @@ fi
 
 PIN_BEFORE="$(awk -F= '/^cli_sha=/{print $2}' "$ROOT/deps/yai-cli.ref" 2>/dev/null || true)"
 PIN_AFTER="$(EXPECTED_SPECS_SHA="$EXPECTED_SPECS_SHA" "$PIN_SCRIPT")"
-echo "Resolved yai-cli pin: $PIN_AFTER"
+echo "Resolved cli pin: $PIN_AFTER"
 
 if ! echo "$PIN_AFTER" | grep -Eq "^[0-9a-f]{40}$"; then
   echo "ERROR: resolved pin is invalid: $PIN_AFTER" >&2

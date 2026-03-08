@@ -26,7 +26,7 @@ on:
       infra_repo:
         required: false
         type: string
-        default: yai-labs/yai-infra
+        default: yai-labs/infra
       infra_ref:
         required: false
         type: string

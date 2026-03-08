@@ -22,7 +22,7 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `yai-dev-fix-phase`: dry-run/apply fixer for phase naming/labels/milestone alignment.
 - `yai-dev-label-sync`: dry-run/apply sync for label color palette (phase/track/class/type/area/work-type + core governance labels).
 - `yai-dev-branch`: alias of `yai-branch`.
-- `yai-dev-branch-sync`: create/check out the same branch across `yai`, `yai-cli`, `yai-mind`.
+- `yai-dev-branch-sync`: create/check out the same branch across `yai`, `cli`, `yai-mind`.
 - `yai-dev-pr-body`: alias of `yai-pr-body`.
 - `yai-dev-pr-check`: alias of `yai-pr-check`.
 - `yai-law-sync`: canonical sync for law pin and proof-pack refs (`manifest` + `README`).
